@@ -87,11 +87,12 @@ def compute_cohens_d(group1: Sequence[float], group2: Sequence[float]) -> float:
         s_pooled = 0.0
 
     if s_pooled < 1e-9:
-        # Fallback if both groups have zero variance
         diff = mean1 - mean2
         if abs(diff) < 1e-9:
             return 0.0
-        return float(np.sign(diff) * 10.0)  # Large effect if completely separated
+        # Honest reporting: zero variance cannot yield a mathematically defined Cohen's d
+        logger.warning("Pooled standard deviation < 1e-9; Cohen's d is undefined without variance.")
+        return float("nan")
 
     return float((mean1 - mean2) / s_pooled)
 
@@ -119,13 +120,91 @@ def compute_welch_t_test(group1: Sequence[float], group2: Sequence[float]) -> tu
         if np.isclose(np.mean(g1), np.mean(g2)):
             return 0.0, 1.0
         else:
-            # Deterministic separation
-            return float(np.sign(np.mean(g1) - np.mean(g2)) * 100.0), 0.0001
+            logger.warning("Both sample groups have near-zero variance; Welch's t-test is degenerate.")
+            return float("nan"), 1.0
 
     res = stats.ttest_ind(g1, g2, equal_var=False)
     t_stat = float(res.statistic) if not np.isnan(res.statistic) else 0.0
     p_val = float(res.pvalue) if not np.isnan(res.pvalue) else 1.0
     return t_stat, p_val
+
+
+def compute_bootstrap_ci(
+    data: Sequence[float],
+    num_bootstraps: int = 1000,
+    ci: float = 0.95,
+    seed: int = 42,
+) -> tuple[float, float, float]:
+    """Compute empirical mean and non-parametric bootstrap confidence interval.
+
+    Args:
+        data: Sequence of numerical values.
+        num_bootstraps: Number of bootstrap resamples (default 1,000).
+        ci: Confidence level (default 0.95 for 95% CI).
+        seed: Random seed for reproducibility.
+
+    Returns:
+        (mean, ci_lower, ci_upper)
+    """
+    arr = np.asarray(data, dtype=np.float64)
+    n = len(arr)
+    if n == 0:
+        return 0.0, 0.0, 0.0
+    if n == 1 or np.var(arr) < 1e-12:
+        m = float(np.mean(arr))
+        return m, m, m
+
+    rng = np.random.RandomState(seed)
+    indices = rng.randint(0, n, size=(num_bootstraps, n))
+    bootstrap_means = np.mean(arr[indices], axis=1)
+
+    alpha = (1.0 - ci) / 2.0
+    ci_lower = float(np.percentile(bootstrap_means, alpha * 100.0))
+    ci_upper = float(np.percentile(bootstrap_means, (1.0 - alpha) * 100.0))
+    return float(np.mean(arr)), ci_lower, ci_upper
+
+
+def compute_bootstrap_difference_ci(
+    group1: Sequence[float],
+    group2: Sequence[float],
+    num_bootstraps: int = 1000,
+    ci: float = 0.95,
+    seed: int = 42,
+) -> tuple[float, float, float]:
+    """Compute non-parametric bootstrap confidence interval for the difference in means (group1 - group2).
+
+    Args:
+        group1: Experimental sample values.
+        group2: Baseline control sample values.
+        num_bootstraps: Number of resamples (default 1,000).
+        ci: Confidence level (default 0.95).
+        seed: Random seed for reproducibility.
+
+    Returns:
+        (diff_mean, diff_ci_lower, diff_ci_upper)
+    """
+    g1 = np.asarray(group1, dtype=np.float64)
+    g2 = np.asarray(group2, dtype=np.float64)
+    n1, n2 = len(g1), len(g2)
+    if n1 == 0 or n2 == 0:
+        return 0.0, 0.0, 0.0
+
+    mean_diff = float(np.mean(g1) - np.mean(g2))
+    if np.var(g1) < 1e-12 and np.var(g2) < 1e-12:
+        return mean_diff, mean_diff, mean_diff
+
+    rng = np.random.RandomState(seed)
+    idx1 = rng.randint(0, n1, size=(num_bootstraps, n1))
+    idx2 = rng.randint(0, n2, size=(num_bootstraps, n2))
+
+    b_means1 = np.mean(g1[idx1], axis=1)
+    b_means2 = np.mean(g2[idx2], axis=1)
+    diffs = b_means1 - b_means2
+
+    alpha = (1.0 - ci) / 2.0
+    ci_lower = float(np.percentile(diffs, alpha * 100.0))
+    ci_upper = float(np.percentile(diffs, (1.0 - alpha) * 100.0))
+    return mean_diff, ci_lower, ci_upper
 
 
 class StatisticalAnalyzer:

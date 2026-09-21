@@ -1,0 +1,569 @@
+{
+  "biological_results": {
+    "model_name": "Biological MaleCNS v1.0",
+    "sample_size": 10,
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51
+    ],
+    "trial_yaw_rates": [
+      34.59473739138533,
+      31.487684337946536,
+      35.38405112734493,
+      25.72018722542314,
+      28.43680959043109,
+      60.31654678673636,
+      41.22650956600922,
+      45.940193866964265,
+      27.265688279867778,
+      51.55426785525625
+    ],
+    "trial_yaws": [
+      2.7675789913108266,
+      2.519014747035723,
+      2.8307240901875947,
+      2.0576149780338513,
+      2.274944767234487,
+      4.825323742938909,
+      3.2981207652807374,
+      3.675215509357141,
+      2.1812550623894222,
+      4.1243414284205
+    ],
+    "yaw_rate_mean": 38.19266760273649,
+    "yaw_rate_std": 10.83122980119622,
+    "yaw_rate_ci_95": [
+      32.37019493791391,
+      45.22072244380604
+    ],
+    "intact_speed_mean": 7.921801134943962,
+    "lesion_speed_mean": 8.148700594902039
+  },
+  "scrambled_null_results": [
+    {
+      "null_model_index": 1,
+      "seed": 101,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.4419889502762431,
+        "hop2_edge_overlap": 0.06980273141122914
+      },
+      "trial_yaw_rates": [
+        6.83326275513926,
+        0.7310009959206054,
+        1.2612798076074796
+      ],
+      "yaw_rate_mean": 2.941847852889115,
+      "yaw_rate_std": 2.7601487110446166,
+      "yaw_rate_ci_95": [
+        0.7310009959206054,
+        6.83326275513926
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.512637515862783
+    },
+    {
+      "null_model_index": 2,
+      "seed": 102,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.43646408839779005,
+        "hop2_edge_overlap": 0.06904400606980274
+      },
+      "trial_yaw_rates": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "yaw_rate_mean": 0.0,
+      "yaw_rate_std": 0.0,
+      "yaw_rate_ci_95": [
+        0.0,
+        0.0
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.439357578754425
+    },
+    {
+      "null_model_index": 3,
+      "seed": 103,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.4530386740331492,
+        "hop2_edge_overlap": 0.07890743550834597
+      },
+      "trial_yaw_rates": [
+        13.951088266574171,
+        5.480714544747478,
+        6.707501897046397
+      ],
+      "yaw_rate_mean": 8.713101569456015,
+      "yaw_rate_std": 3.737524161021591,
+      "yaw_rate_ci_95": [
+        5.480714544747478,
+        13.95108826657417
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.363961428403854
+    },
+    {
+      "null_model_index": 4,
+      "seed": 104,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.4419889502762431,
+        "hop2_edge_overlap": 0.06904400606980274
+      },
+      "trial_yaw_rates": [
+        2.4404265904455573,
+        0.07291226938987982,
+        1.0830118702701468
+      ],
+      "yaw_rate_mean": 1.1987835767018613,
+      "yaw_rate_std": 0.9699942718416827,
+      "yaw_rate_ci_95": [
+        0.07291226938987982,
+        2.4404265904455573
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.478964616854986
+    },
+    {
+      "null_model_index": 5,
+      "seed": 105,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.4530386740331492,
+        "hop2_edge_overlap": 0.0622154779969651
+      },
+      "trial_yaw_rates": [
+        4.008723401245106,
+        0.5334377741780028,
+        3.750798382712502
+      ],
+      "yaw_rate_mean": 2.76431985271187,
+      "yaw_rate_std": 1.5809822822197077,
+      "yaw_rate_ci_95": [
+        0.5334377741780028,
+        4.008723401245106
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.405213057994843
+    },
+    {
+      "null_model_index": 6,
+      "seed": 106,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.4585635359116022,
+        "hop2_edge_overlap": 0.06904400606980274
+      },
+      "trial_yaw_rates": [
+        9.917605429587764,
+        0.24776511214220642,
+        0.7145231645479588
+      ],
+      "yaw_rate_mean": 3.6266312354259767,
+      "yaw_rate_std": 4.452469951504713,
+      "yaw_rate_ci_95": [
+        0.24776511214220642,
+        9.917605429587764
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.43148355682691
+    },
+    {
+      "null_model_index": 7,
+      "seed": 107,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.43646408839779005,
+        "hop2_edge_overlap": 0.06752655538694992
+      },
+      "trial_yaw_rates": [
+        4.168891337281908,
+        0.9067929896838245,
+        1.6983265371236704
+      ],
+      "yaw_rate_mean": 2.2580036213631343,
+      "yaw_rate_std": 1.3893044389951943,
+      "yaw_rate_ci_95": [
+        0.9067929896838245,
+        4.168891337281908
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.460776507854462
+    },
+    {
+      "null_model_index": 8,
+      "seed": 108,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.4088397790055249,
+        "hop2_edge_overlap": 0.07890743550834597
+      },
+      "trial_yaw_rates": [
+        3.2807959904509993,
+        1.0243576207726535,
+        2.8283813353022804
+      ],
+      "yaw_rate_mean": 2.377844982175311,
+      "yaw_rate_std": 0.9747190306804246,
+      "yaw_rate_ci_95": [
+        1.0243576207726535,
+        3.2807959904509993
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.470592151085535
+    },
+    {
+      "null_model_index": 9,
+      "seed": 109,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.44751381215469616,
+        "hop2_edge_overlap": 0.07511380880121396
+      },
+      "trial_yaw_rates": [
+        1.4292170838251683,
+        0.16648586101906115,
+        8.58938976811416
+      ],
+      "yaw_rate_mean": 3.3950309043194626,
+      "yaw_rate_std": 3.708966211733781,
+      "yaw_rate_ci_95": [
+        0.16648586101906115,
+        8.58938976811416
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.24162537852923
+    },
+    {
+      "null_model_index": 10,
+      "seed": 110,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.4861878453038674,
+        "hop2_edge_overlap": 0.05690440060698027
+      },
+      "trial_yaw_rates": [
+        1.1914411233440974,
+        0.6583448586246043,
+        3.1146516388904395
+      ],
+      "yaw_rate_mean": 1.6548125402863805,
+      "yaw_rate_std": 1.0549551498284349,
+      "yaw_rate_ci_95": [
+        0.6583448586246043,
+        3.1146516388904395
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.428129305442175
+    },
+    {
+      "null_model_index": 11,
+      "seed": 111,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.4143646408839779,
+        "hop2_edge_overlap": 0.07890743550834597
+      },
+      "trial_yaw_rates": [
+        0.3229825703769784,
+        0.06138632516548004,
+        0.45121937204396745
+      ],
+      "yaw_rate_mean": 0.27852942252880863,
+      "yaw_rate_std": 0.1622231238651458,
+      "yaw_rate_ci_95": [
+        0.06138632516548004,
+        0.45121937204396745
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.44766323765119
+    },
+    {
+      "null_model_index": 12,
+      "seed": 112,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.4419889502762431,
+        "hop2_edge_overlap": 0.06904400606980274
+      },
+      "trial_yaw_rates": [
+        8.571631276272127,
+        0.3507302138801571,
+        2.69980302417679
+      ],
+      "yaw_rate_mean": 3.874054838109691,
+      "yaw_rate_std": 3.4573548715072997,
+      "yaw_rate_ci_95": [
+        0.3507302138801571,
+        8.571631276272127
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.427504946788153
+    },
+    {
+      "null_model_index": 13,
+      "seed": 113,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.44751381215469616,
+        "hop2_edge_overlap": 0.05386949924127466
+      },
+      "trial_yaw_rates": [
+        3.0312379536516607,
+        3.5063629877906677,
+        0.8139877943362697
+      ],
+      "yaw_rate_mean": 2.450529578592866,
+      "yaw_rate_std": 1.1733535154219923,
+      "yaw_rate_ci_95": [
+        0.8139877943362697,
+        3.5063629877906677
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.447575569152832
+    },
+    {
+      "null_model_index": 14,
+      "seed": 114,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.44751381215469616,
+        "hop2_edge_overlap": 0.082701062215478
+      },
+      "trial_yaw_rates": [
+        5.625429177787125,
+        0.2952349268737997,
+        3.2092497588951163
+      ],
+      "yaw_rate_mean": 3.043304621185347,
+      "yaw_rate_std": 2.1792041406079883,
+      "yaw_rate_ci_95": [
+        0.2952349268737997,
+        5.625429177787125
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.337151755889257
+    },
+    {
+      "null_model_index": 15,
+      "seed": 115,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.430939226519337,
+        "hop2_edge_overlap": 0.05993930197268589
+      },
+      "trial_yaw_rates": [
+        0.14266557628864196,
+        10.195935638265786,
+        1.5830670948797052
+      ],
+      "yaw_rate_mean": 3.9738894364780446,
+      "yaw_rate_std": 4.438774856239486,
+      "yaw_rate_ci_95": [
+        0.14266557628864196,
+        10.195935638265786
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.50378672281901
+    },
+    {
+      "null_model_index": 16,
+      "seed": 116,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.49171270718232046,
+        "hop2_edge_overlap": 0.07207890743550835
+      },
+      "trial_yaw_rates": [
+        3.7578847039763885,
+        0.14847123708315868,
+        0.9925972411321031
+      ],
+      "yaw_rate_mean": 1.6329843940638835,
+      "yaw_rate_std": 1.5415442847953054,
+      "yaw_rate_ci_95": [
+        0.14847123708315868,
+        3.7578847039763885
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.265778174002966
+    },
+    {
+      "null_model_index": 17,
+      "seed": 117,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.3867403314917127,
+        "hop2_edge_overlap": 0.07663125948406677
+      },
+      "trial_yaw_rates": [
+        3.7031578132516616,
+        0.1558136904409091,
+        7.389240153578294
+      ],
+      "yaw_rate_mean": 3.749403885756955,
+      "yaw_rate_std": 2.953215041704061,
+      "yaw_rate_ci_95": [
+        0.1558136904409091,
+        7.389240153578295
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.310820659001669
+    },
+    {
+      "null_model_index": 18,
+      "seed": 118,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.4696132596685083,
+        "hop2_edge_overlap": 0.07132018209408195
+      },
+      "trial_yaw_rates": [
+        8.523649197352787,
+        1.3922486849424764,
+        0.4236424832700408
+      ],
+      "yaw_rate_mean": 3.4465134551884344,
+      "yaw_rate_std": 3.6117890305453573,
+      "yaw_rate_ci_95": [
+        0.4236424832700408,
+        8.523649197352787
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.30662672718366
+    },
+    {
+      "null_model_index": 19,
+      "seed": 119,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.43646408839779005,
+        "hop2_edge_overlap": 0.07359635811836115
+      },
+      "trial_yaw_rates": [
+        1.2157736722622714,
+        1.172060461574187,
+        2.7355761399547323
+      ],
+      "yaw_rate_mean": 1.7078034245970635,
+      "yaw_rate_std": 0.726964133467588,
+      "yaw_rate_ci_95": [
+        1.172060461574187,
+        2.7355761399547323
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.630651980638504
+    },
+    {
+      "null_model_index": 20,
+      "seed": 120,
+      "degree_diff": {
+        "hop1_max_in_degree_diff": 0.0,
+        "hop1_max_out_degree_diff": 0.0,
+        "hop2_max_in_degree_diff": 0.0,
+        "hop2_max_out_degree_diff": 0.0,
+        "hop1_edge_overlap": 0.40331491712707185,
+        "hop2_edge_overlap": 0.07056145675265554
+      },
+      "trial_yaw_rates": [
+        13.643729753923594,
+        1.8259656972382854,
+        0.21079671325951835
+      ],
+      "yaw_rate_mean": 5.2268307214737995,
+      "yaw_rate_std": 5.988062274422473,
+      "yaw_rate_ci_95": [
+        0.21079671325951835,
+        13.643729753923594
+      ],
+      "intact_speed_mean": 8.439357578754425,
+      "lesion_speed_mean": 8.220839500427246
+    }
+  ],
+  "falsification_report": {
+    "verdict": "HYPOTHESIS CONFIRMED: Biological connectome possesses motor functional specificity that degree-matched random networks fail to replicate under unilateral ablation.",
+    "verdict_confirmed": true,
+    "threshold_deg_s": 15.0,
+    "criterion_1_biological_turning_gt_threshold": true,
+    "criterion_2_non_overlapping_cis": true,
+    "criterion_3_fewer_than_10_nulls_turning": true,
+    "nulls_exceeding_threshold_count": 0,
+    "biological_ci_95": [
+      32.37019493791391,
+      45.22072244380604
+    ],
+    "null_ensemble_ci_95": [
+      2.1216718004431097,
+      3.7927606815216315
+    ]
+  }
+}

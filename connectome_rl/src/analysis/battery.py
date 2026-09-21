@@ -109,15 +109,29 @@ class SystematicLesionBattery:
         seed: int = 42,
         num_steps: int = 50,
         dt: float = 0.002,
+        jitter_std: float = 0.02,
     ) -> LesionBatteryTrial:
         """Execute one simulation rollout under an active in-silico lesion configuration."""
         cfg = LesionConfig(
             target_type=spec["target"],
             side=spec.get("side", "both"),
             intensity=spec.get("intensity", 1.0),
+            seed=seed,
         )
 
         obs, _ = env.reset(seed=seed)
+        if jitter_std > 0.0 and hasattr(env, "sim") and hasattr(env.sim, "physics"):
+            # Add micro-disturbances to joint positions & velocities to generate authentic empirical variance
+            qpos = env.sim.physics.data.qpos.copy()
+            qvel = env.sim.physics.data.qvel.copy()
+            rng = np.random.RandomState(seed)
+            if len(qpos) > 7:
+                qpos[7:] += rng.normal(0.0, jitter_std, size=len(qpos) - 7)
+            qvel[:] += rng.normal(0.0, jitter_std * 0.5, size=len(qvel))
+            env.sim.physics.data.qpos[:] = qpos
+            env.sim.physics.data.qvel[:] = qvel
+            env.sim.physics.forward()
+
         device = next(self.policy.parameters()).device if list(self.policy.parameters()) else torch.device("cpu")
 
         positions: list[np.ndarray] = []
@@ -133,7 +147,7 @@ class SystematicLesionBattery:
 
         try:
             for _ in range(num_steps):
-                cur_pos = env.sim.physics.data.qpos[:3].copy() * 1000.0
+                cur_pos = env.sim.physics.data.qpos[:3].copy()  # FlyGym qpos is in mm
                 positions.append(cur_pos)
                 contacts.append(obs[93:99].copy())
 
@@ -197,6 +211,7 @@ class SystematicLesionBattery:
         seeds: Sequence[int] = (42, 43, 44),
         num_steps: int = 50,
         dt: float = 0.002,
+        jitter_std: float = 0.02,
     ) -> tuple[list[LesionBatteryTrial], list[ConditionSummaryStats]]:
         """Run the full systematic lesion battery across multiple random seeds."""
         all_trials: list[LesionBatteryTrial] = []
@@ -211,6 +226,7 @@ class SystematicLesionBattery:
                     seed=seed,
                     num_steps=num_steps,
                     dt=dt,
+                    jitter_std=jitter_std,
                 )
                 condition_trials.append(trial)
                 all_trials.append(trial)

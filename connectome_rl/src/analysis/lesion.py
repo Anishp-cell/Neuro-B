@@ -45,6 +45,7 @@ class LesionConfig:
     intensity: float = 1.0      # 1.0 = total knockout (0 weight), 0.5 = 50% knockdown
     start_step: int = 0         # Timestep to begin ablation (0 = whole episode)
     end_step: int | None = None # Timestep to end ablation (None = until episode end)
+    seed: int | None = 42       # Explicit seed for random ablation targets
 
 
 @dataclass
@@ -60,6 +61,7 @@ class LesionResult:
     net_yaw_rotation: float       # Cumulative body turning angle (degrees)
     mean_speed: float             # Average forward velocity (mm/s)
     stability_score: float        # Mean dorsal upright alignment dot product
+    seed: int = 42                # Random seed used for evaluation rollout
     trajectory_x: list[float] = field(default_factory=list)
     trajectory_y: list[float] = field(default_factory=list)
     step_rewards: list[float] = field(default_factory=list)
@@ -145,7 +147,8 @@ class LesionController:
         elif target == "RANDOM":
             total_dns = len(self._circuit_data.dn_indices) if self._circuit_data else 4
             num_k = min(config.num_random_nodes, total_dns)
-            perm = np.random.permutation(total_dns)
+            rng = np.random.RandomState(config.seed if config.seed is not None else 42)
+            perm = rng.permutation(total_dns)
             return perm[:num_k].tolist()
 
         else:
@@ -322,9 +325,9 @@ class LesionController:
         final_pos = env.sim.physics.data.qpos[:3].copy()
         final_heading = obs[84:87].copy()
 
-        # Displacement in arena frame (mm)
-        dx = float(final_pos[0] - init_pos[0]) * 1000.0  # Convert m to mm
-        dy = float(final_pos[1] - init_pos[1]) * 1000.0
+        # Displacement in arena frame (mm) - FlyGym qpos is already in mm
+        dx = float(final_pos[0] - init_pos[0])
+        dy = float(final_pos[1] - init_pos[1])
 
         angle_init = np.arctan2(init_heading[1], init_heading[0])
         angle_final = np.arctan2(final_heading[1], final_heading[0])
@@ -348,6 +351,7 @@ class LesionController:
             net_yaw_rotation=float(dyaw),
             mean_speed=float(mean_speed),
             stability_score=float(np.mean([info.get("upright_score", 1.0)])),
+            seed=seed,
             trajectory_x=traj_x,
             trajectory_y=traj_y,
             step_rewards=step_rewards,

@@ -122,6 +122,11 @@ class CPGLocomotionEnv(gym.Env):
         fly_pos = obs_dict["fly"][0]
         self.initial_pos = np.copy(fly_pos)
         self.current_pos = np.copy(fly_pos)
+        if len(obs_dict["fly"]) > 2:
+            ang_pos = obs_dict["fly"][2]
+            self.initial_yaw_rad = float(ang_pos[0]) if (ang_pos.ndim == 0 or len(ang_pos) >= 1) else 0.0
+        else:
+            self.initial_yaw_rad = 0.0
         self.current_yaw_deg = 0.0
         self.step_count = 0
 
@@ -168,18 +173,21 @@ class CPGLocomotionEnv(gym.Env):
         fly_pos = obs_dict["fly"][0]
         self.current_pos = np.copy(fly_pos)
 
-        # Compute heading orientation
-        fly_rot = obs_dict["fly"][1]  # rotation matrix or euler
-        if fly_rot.shape == (3, 3):
-            # Yaw from rotation matrix R[1, 0] / R[0, 0]
-            self.current_yaw_deg = float(np.degrees(np.arctan2(fly_rot[1, 0], fly_rot[0, 0])))
-        elif len(fly_rot) == 3:
-            self.current_yaw_deg = float(np.degrees(fly_rot[2]))
+        # Compute heading orientation relative to initial yaw at spawn
+        if len(obs_dict["fly"]) > 2:
+            ang_pos = obs_dict["fly"][2]
+            if ang_pos.ndim == 0 or len(ang_pos) >= 1:
+                yaw_diff = float(ang_pos[0]) - getattr(self, "initial_yaw_rad", 0.0)
+                # Wrap to [-pi, pi]
+                yaw_diff = (yaw_diff + np.pi) % (2 * np.pi) - np.pi
+                self.current_yaw_deg = float(np.degrees(yaw_diff))
+        else:
+            self.current_yaw_deg = 0.0
 
         forward_dist = float(self.current_pos[0] - self.initial_pos[0])
 
-        # Dense locomotion reward
-        step_reward = forward_dist * 10.0 - 0.1 * abs(self.current_yaw_deg)
+        # Dense locomotion reward: positive forward displacement with small yaw penalty
+        step_reward = forward_dist * 10.0 - 0.01 * abs(self.current_yaw_deg)
 
         obs_vec = self._build_obs_vector(obs_dict, cpg_action[0], cpg_action[1])
 
@@ -197,7 +205,7 @@ class CPGLocomotionEnv(gym.Env):
     ) -> np.ndarray:
         """Flatten sensory state into a compact 12-dimensional vector."""
         pos = obs_dict["fly"][0]
-        vel = obs_dict["fly"][2] if len(obs_dict["fly"]) > 2 else np.zeros(3)
+        vel = obs_dict["fly"][1] if len(obs_dict["fly"]) > 1 else np.zeros(3)
 
         obs = np.array([
             pos[0], pos[1], pos[2],
