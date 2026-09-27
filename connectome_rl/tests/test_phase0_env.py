@@ -58,6 +58,6 @@ def test_neuprint_connection():
     import os
     from neuprint import Client
     token = os.environ.get("NEUPRINT_APPLICATION_CREDENTIALS", "a3ad6b2c6b4319d0edde6d62215439f1a4b8e7477e457910100ac2450a1bb7e6")
-    client = Client("https://neuprint.janelia.org", dataset="male-cns:v1.0", token=token)
+    client = Client("https://neuprint.janelia.org", dataset="manc:v1.0", token=token)
     res = client.fetch_custom("MATCH (n:Neuron) WHERE n.type = 'DNa01' RETURN count(n) as count")
-    assert res["count"].iloc[0] > 0, "Expected at least 1 DNa01 neuron in MaleCNS v1.0"
+    assert res["count"].iloc[0] > 0, "Expected at least 1 DNa01 neuron in MANC v1.0"
