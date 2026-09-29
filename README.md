@@ -5,6 +5,7 @@
 [![MuJoCo 3.2.7](https://img.shields.io/badge/mujoco-3.2.7-orange.svg)](https://mujoco.org/)
 [![PyTorch 2.5+](https://img.shields.io/badge/pytorch-2.5+-red.svg)](https://pytorch.org/)
 [![Tests Passing](https://img.shields.io/badge/tests-86%2F86%20passed%20(100%25)-success.svg)](connectome_rl/tests/)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23018266.svg)](https://doi.org/10.5281/zenodo.23018266)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 An embodied artificial intelligence and computational neuroscience platform coupling the **Janelia MaleCNS v1.0** biological connectome with **FlyGym** (a physics-accurate 42-DOF *Drosophila melanogaster* biomechanical simulation in MuJoCo) and **Continuous Deep Reinforcement Learning (PPO + DEP-RL)**.
@@ -129,6 +130,32 @@ pytest connectome_rl/tests/ -v
 - **Connectome Source:** Janelia Research Campus / Cambridge / Google MaleCNS v1.0 dataset (`male-cns:v1.0`).
 - **Biomechanical Model:** NeuroMechFly / FlyGym (*Lobato-Rios et al., Nature Methods 2024*).
 - **Self-Organizing Exploration:** Differential Extrinsic Plasticity (*Schmidt, Tourbier et al., Nature Machine Intelligence 2023*).
+
+---
+
+## 📖 Citation
+
+If you use this codebase, models, or simulation audit pipeline in your research, please cite it as:
+
+```text
+Pathak, A. (2026). Connectome Wiring Shapes Motor Lesion Phenotypes in Embodied Drosophila Locomotion. Zenodo. https://doi.org/10.5281/zenodo.23018266
+```
+
+Or using BibTeX:
+
+```bibtex
+@software{pathak2026connectome,
+  author       = {Pathak, Anish},
+  title        = {{Connectome Wiring Shapes Motor Lesion Phenotypes in Embodied Drosophila Locomotion}},
+  year         = {2026},
+  publisher    = {Zenodo},
+  version      = {1.0.0},
+  doi          = {10.5281/zenodo.23018266},
+  url          = {https://doi.org/10.5281/zenodo.23018266}
+}
+```
+
+A machine-readable citation metadata file is also available in [`CITATION.cff`](CITATION.cff).
 
 ---
 
