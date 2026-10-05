@@ -13,15 +13,18 @@ Usage:
 from __future__ import annotations
 
 import os
+
+# Explicitly configure WSLg display environment to prevent [WARN: COPY MODE]
+if not os.environ.get("DISPLAY"):
+    os.environ["DISPLAY"] = ":0"
+if "XDG_RUNTIME_DIR" not in os.environ:
+    os.environ["XDG_RUNTIME_DIR"] = "/mnt/wslg/runtime-dir"
+if "WAYLAND_DISPLAY" in os.environ:
+    del os.environ["WAYLAND_DISPLAY"]
+
 # Activate Direct3D 12 hardware acceleration for WSLg using NVIDIA GPU
 os.environ.setdefault("GALLIUM_DRIVER", "d3d12")
 os.environ.setdefault("MESA_D3D12_DEFAULT_ADAPTER_NAME", "NVIDIA")
-
-# Fix WSLg Wayland invisible window bug:
-# In WSLg, GLFW on Wayland sometimes registers in the taskbar but fails to present its surface.
-# Forcing X11 ensures the window is immediately mapped to a visible Windows desktop window.
-if "WAYLAND_DISPLAY" in os.environ and os.environ.get("DISPLAY"):
-    del os.environ["WAYLAND_DISPLAY"]
 
 
 import argparse
@@ -64,6 +67,15 @@ def launch_interactive_viewer(
         print(f"  [*] TRAINED CHECKPOINT: {checkpoint}")
     print(f"  [*] CAMERA DISTANCE:    {cam_distance} mm (Thorax Auto-Tracking)")
     print("=" * 75)
+
+    if mode == "flight":
+        from scripts.view_flight_interactive import launch_flight_viewer
+        launch_flight_viewer(
+            pattern=steer if steer in ["demo", "hover", "soar"] else "demo",
+            cam_dist=max(cam_distance, 18.0),
+            cruise_speed=speed,
+        )
+        return
 
     if mode == "walking":
         print("\n[1/2] Initializing Biological CPG Locomotion Engine (FlyGym v1.2.1)...")
@@ -209,7 +221,7 @@ def launch_interactive_viewer(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Interactive MuJoCo 3D Fly Viewer")
-    parser.add_argument("--mode", type=str, default="walking", choices=["walking", "posture"], help="Locomotion mode ('walking' or 'posture')")
+    parser.add_argument("--mode", type=str, default="walking", choices=["walking", "flight", "posture"], help="Locomotion mode ('walking', 'flight', 'posture')")
     parser.add_argument("--steer", type=str, default="straight", choices=["straight", "left", "right", "patrol"], help="Steering behavior in walking mode")
     parser.add_argument("--speed", type=float, default=1.0, help="Walking speed multiplier (default 1.0 = real-time, 1.5 = brisk, 2.0 = fast sprint)")
     parser.add_argument("--pose", type=str, default="tripod", choices=["tripod", "stretch"], help="Starting posture (posture mode)")
