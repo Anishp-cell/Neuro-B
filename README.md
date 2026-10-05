@@ -4,7 +4,7 @@
 [![FlyGym 1.2.1](https://img.shields.io/badge/flygym-1.2.1-brightgreen.svg)](https://neuromechfly.org/)
 [![MuJoCo 3.2.7](https://img.shields.io/badge/mujoco-3.2.7-orange.svg)](https://mujoco.org/)
 [![PyTorch 2.5+](https://img.shields.io/badge/pytorch-2.5+-red.svg)](https://pytorch.org/)
-[![Tests Passing](https://img.shields.io/badge/tests-86%2F86%20passed%20(100%25)-success.svg)](connectome_rl/tests/)
+[![Tests Passing](https://img.shields.io/badge/tests-103%2F103%20passed%20(100%25)-success.svg)](connectome_rl/tests/)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23018266.svg)](https://doi.org/10.5281/zenodo.23018266)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
@@ -60,17 +60,19 @@ biomechanical_drl/
 │   ├── src/
 │   │   ├── connectome/            # NeuPrint queries, graph pruning, tensor conversions
 │   │   ├── models/                # ConnectomePolicy, ConnectomeRNN, SynapticGNN, HierarchicalPolicy, MLPPolicy, DEP
-│   │   ├── envs/                  # FlyLocomotionEnv (42 DOFs), LocomotionRewardCalculator
+│   │   ├── envs/                  # FlyLocomotionEnv, UnifiedFlyFlightEnv, FlightController, Haltere & Optomotor Aerodynamics
 │   │   ├── rl/                    # RolloutBuffer (GAE), PPOTrainer, training pipeline
 │   │   └── analysis/              # LesionController, KinematicAnalyzer, StatisticalAnalyzer, visualize
-│   └── tests/                     # 86 comprehensive unit & integration tests (100% passing)
-├── outputs/                       # Publication figures (.png), comparison GIFs (.gif), LaTeX tables (.tex, .md)
+│   └── tests/                     # 103 comprehensive unit & integration tests (100% passing)
+├── outputs/                       # Publication figures (.png), comparison GIFs (.gif), flight demos (.mp4), LaTeX tables
 ├── scripts/
-│   ├── view_fly_interactive.py    # Desktop OpenGL 3D viewer with real-time mouse/camera controls
+│   ├── view_fly_interactive.py    # Desktop OpenGL 3D viewer (walking & flight modes with WSLg acceleration)
+│   ├── view_flight_interactive.py # Dedicated real-time 3D flight viewer window with orbit/zoom tracking
+│   ├── demo_flight_simulation.py  # 10s HD multi-modal video renderer (takeoff, cruise, S-turn, landing)
+│   ├── generate_linkedin_comparison_video.py # Side-by-side intact vs. DNa01 lesion audit video generator
 │   ├── run_model_comparison.py    # Head-to-head Connectome vs. MLP benchmark
 │   ├── run_systematic_lesion_battery.py # Multi-seed in-silico ablation suite
 │   ├── run_statistical_analysis.py # Welch's t-test, Cohen's d, LaTeX export
-│   ├── run_simulation_demo.py     # Headless rollout & GIF generator
 │   └── verify_env.py              # System environment & hardware accelerator verification
 ├── pyproject.toml                 # Package specification
 └── requirements.txt               # Pinned dependencies
@@ -115,13 +117,39 @@ python scripts/run_systematic_lesion_battery.py
 python scripts/run_statistical_analysis.py
 ```
 
-### 4. Run the Full Test Suite
-Verify that all 86 unit and integration tests pass:
+### 4. Aerodynamic Flight Engine: Takeoff, Free Flight & Landing
+Launch the multimodal flight simulation and render synchronized 3D tracking video with flight HUD telemetry overlays:
+```bash
+python scripts/demo_flight_simulation.py
+```
+*Outputs generated in `outputs/`:*
+* `outputs/flight_takeoff_landing_demo.mp4` (High-definition 10s video)
+* `outputs/flight_takeoff_landing_demo.gif` (Web animated preview)
+
+### 5. Interactive 3D Flight Simulator Window
+Experience live real-time flight in a native MuJoCo 3D desktop window:
+```bash
+python scripts/view_flight_interactive.py
+# or
+python scripts/view_fly_interactive.py --mode flight
+```
+
+### 6. Side-by-Side Connectome Audit Video (Intact vs. DNa01 Lesion)
+Render high-definition side-by-side synchronized video showing the biological connectome vs. unilateral steering ablation:
+```bash
+python scripts/generate_linkedin_comparison_video.py
+```
+*Outputs generated in `outputs/`:*
+* `outputs/linkedin_connectome_comparison.mp4`
+* `outputs/linkedin_connectome_comparison.gif`
+
+### 7. Run the Full Test Suite
+Verify that all 103 unit and integration tests pass:
 ```bash
 pytest connectome_rl/tests/ -v
 ```
 ```
-============================= 86 passed in 22.95s ==============================
+============================= 103 passed in 80.72s ==============================
 ```
 
 ---
